@@ -741,7 +741,7 @@ static int do_portcounters(Port * port, unsigned op, uint32_t unused,
 	Port *p;
 	int i;
 
-	if (node->type != SWITCH_NODE && portnum != port->portnum)
+	if (node->type != SWITCH_NODE && portnum != port->portnum && portnum != 0xff)
 		return ERR_BAD_PARAM;	//undef_behav.
 
 	if (node->type == SWITCH_NODE && portnum > node->numports
@@ -836,7 +836,7 @@ do_extcounters(Port * port, unsigned op, uint32_t unused, uint8_t * data)
 	int i;
 
 	portnum = mad_get_field(data, 0, IB_PC_EXT_PORT_SELECT_F);
-	if (node->type != SWITCH_NODE && portnum != port->portnum)
+	if (node->type != SWITCH_NODE && portnum != port->portnum && portnum != 0xff)
 		return ERR_BAD_PARAM;	//undef_behav.
 
 	if (node->type == SWITCH_NODE && portnum > node->numports
